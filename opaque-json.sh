@@ -7,7 +7,10 @@ function opaque_to_json() {
   while IFS= read -r line
   do
     key=$(echo $line | cut -f 1 -d ':')
-    value=$(echo $line | cut -f 2 -d ':' | base64 -d)
+    value=$(echo $line | cut -f 2 -d ':')
+    if [[ "${value}" != "null" ]]; then
+      value=$(echo "${value}" | base64 -d)
+    fi
     out=$(echo "  \"${key}\": \"${value}\"",)
     if [[ "${key}" == "${last_input_key}" ]]; then
       out=$(echo "  \"${key}\": \"${value}\"")
