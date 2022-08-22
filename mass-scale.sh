@@ -3,7 +3,7 @@
 PROJECT=""
 REPLICAS=1
 
-while getopts p: flag; do
+while getopts p:r: flag; do
   case "${flag}" in
     p)
       PROJECT=${OPTARG}
